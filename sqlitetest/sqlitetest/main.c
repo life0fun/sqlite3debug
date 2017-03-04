@@ -35,7 +35,8 @@ int main(int argc, char **argv){
     else
         perror("getcwd() error");
     
-    char *select = "select * from tracks where AlbumId IN (select AlbumId from albums where ArtistId = (select ArtistId from artists where name='Fretwork'))";
+    // char *select = "select * from tracks where AlbumId IN (select AlbumId from albums where ArtistId = (select ArtistId from artists where name='Fretwork'))";
+    char *select = "select t.*, a.* from tracks t JOIN albums a on a.albumId == t.albumId where t.AlbumId IN (select AlbumId from albums where ArtistId = (select ArtistId from artists where name='Fretwork'))";
     
     rc = sqlite3_open("/Users/haijinyan/dev/sqlitetest/sqlitetest/chinook.db", &db);
     if( rc ){
